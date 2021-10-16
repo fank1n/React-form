@@ -126,3 +126,8 @@ span{
   font-weight: bold;
   padding-right: 6px;
 }
+.errorMessage{
+  font-size: 12px;
+  color: red;
+  text-align: right;
+}
