@@ -1,38 +1,68 @@
-.App {
-  text-align: center;
+html{
+  margin: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  background-color: rgb(255, 255, 255);
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container{
+  margin: 0 auto;
+  width: 1200px;
+  height: 1000px;
+  background-color: #fff;
+  box-shadow: 0px 5px 30px 1px rgba(34, 60, 80, 0.6);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+header{
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  flex-direction: column;
+  background: linear-gradient(to left, #ee9ca7, #ffdde1);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
 }
-
-.App-link {
-  color: #61dafb;
+#header-name{
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  margin: 0;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.page-ref{
+  margin: 30px;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+.lil-container{
+  display: flex;
+}
+.item-container{
+  margin: 0 20px;
+  border-bottom: 2px solid black;
+}
+.item-container-disabled{
+  margin: 0 20px;
+}
+.login-btn{
+  align-self: center;
+  width: 60px;
+  height: 30px;
+  background-color: black;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.login-btn:hover{
+  border: 2px solid white
+}
+.inner-cont{
+  display: flex;
+  gap: 800px;
+  padding-top: 20px;
+}
+.cart-info{
+  margin: 0;
+}
+.prod-price{
+  font-weight: bold;
 }

@@ -1,0 +1,26 @@
+.items{
+    margin-top: 20px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+}
+.prod{
+    align-self: center;
+    text-align: center;
+}
+#items-container{
+    overflow:visible;
+}
+.add-to-cart-btn{
+    color: rgb(36, 36, 36);
+    background-color: rgb(255, 255, 255);
+    border: 2px solid black;
+    width: 120px;
+    cursor: pointer;
+}
+.add-to-cart-btn:hover{
+    color: white;
+    background-color: rgb(36, 36, 36);
+}

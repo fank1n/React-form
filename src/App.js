@@ -1,25 +1,63 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import Home from "./homePage/Home"
+import About from "./aboutPage/About"
+import Modal from "./modal/Modal"
+import { useState } from "react";
 
-function App() {
+const App = () => {
+  const [modalActive, setModalActive] = useState(false)
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="container">
+        <header>
+          <div className="inner-cont">
+            <button 
+            className="login-btn" 
+            onClick = {() => setModalActive(true)}
+            >
+            login
+            </button>
+            <div className = "outer-cart-info-container">
+              <p className = "cart-info"> В корзине X товаров на сумму Y</p>
+            </div>
+          </div>
+          <div className= "lil-container">
+            <div className= "item-container">
+              <a href = "/" className="page-ref">Home</a>
+            </div>
+            <div className = "item-container-disabled">
+              <a href = "/about" className="page-ref">About</a>
+            </div>
+          </div>
+        </header>
+        <Modal
+          active = {modalActive} 
+          setActive = {setModalActive}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+        </Modal>
+      
+      <Switch>
+        <Route 
+          exact
+          path="/"
+          component = {Home}
+          />
 
+        <Route 
+          exact
+          path="/about"
+          component = {About}
+          />
+      </Switch>
+      </div>
+    </div>
+    </Router>
+  );
+};
 export default App;
