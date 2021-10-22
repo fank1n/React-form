@@ -1,8 +1,10 @@
 import "./Home.css";
 import { useState, useEffect } from "react";
+import {
+  BrowserRouter as Router, Link} from "react-router-dom";
+
 const Home = () => {
     const [products, setProducts] = useState([]);
-    // const [cart, setCart]
     useEffect(() => {
       fetch("http://localhost:8000/products")
         .then((res) => {
@@ -17,8 +19,8 @@ const Home = () => {
         <div id = "items-container">
         <div className = 'items'>{products.map((products) =>(
             <div className = "prod" key = {products.id}>
-            <img src = {products.picture} height = '120px' width = '120px'></img>
-            <p className = "prod-title">{products.title}</p>
+            <img src = {products.picture} height = '120px' width = '120px'></img><br/>
+            <Link to = {`/product/${products.id}`} className = "prod-title">{products.title}</Link>
             <p className = "prod-price">{products.price} руб.</p>
             <button 
             className = "add-to-cart-btn"
@@ -27,6 +29,6 @@ const Home = () => {
             </div>
         ))}</div>
         </div>
-    )
-}
+    );
+};
 export default Home;

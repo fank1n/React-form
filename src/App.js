@@ -2,10 +2,12 @@ import "./App.css";
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
 import Home from "./homePage/Home"
 import About from "./aboutPage/About"
+import Description from "./descriptionPage/Descriptrion";
 import Modal from "./modal/Modal"
 import { useState } from "react";
 
@@ -29,10 +31,10 @@ const App = () => {
           </div>
           <div className= "lil-container">
             <div className= "item-container">
-              <a href = "/" className="page-ref">Home</a>
+              <Link to = "/" className="page-ref">Home</Link>
             </div>
-            <div className = "item-container-disabled">
-              <a href = "/about" className="page-ref">About</a>
+            <div className = "item-container">
+              <Link to = "/about" className="page-ref">About</Link>
             </div>
           </div>
         </header>
@@ -48,11 +50,15 @@ const App = () => {
           path="/"
           component = {Home}
           />
-
         <Route 
           exact
           path="/about"
           component = {About}
+          />
+        <Route 
+          exact
+          path="/product/:productID"
+          component = {Description}
           />
       </Switch>
       </div>
