@@ -13,15 +13,11 @@ const Modal = ({ active, setActive }) => {
         <p className="modal-name">Авторизация</p>
         <form className="modal-inputs-container">
           <p className="paragraph">Login</p>
-          <input 
-          className="modal-inputs" 
-          type="text"></input>
+          <input className="modal-inputs" type="text"></input>
           <p className="paragraph">Password</p>
-          <input 
-          className="modal-inputs" 
-          type="password"></input>
+          <input className="modal-inputs" type="password"></input>
           <br />
-          <button id="modal-btn">Залогиниться</button>
+          <button id="modal-btn">Login</button>
         </form>
       </div>
     </div>

@@ -29,30 +29,29 @@
 .modal-content.active {
   transform: scale(1);
 }
-.modal-name{
-    text-align: center;
-    margin-top: 0;
-    font-size: 24px;
+.modal-name {
+  text-align: center;
+  margin-top: 0;
+  font-size: 24px;
 }
-.modal-inputs-container{
-    text-align: center;
-
+.modal-inputs-container {
+  text-align: center;
 }
-.modal-inputs{
-    margin: 0 auto;
+.modal-inputs {
+  margin: 0 auto;
 }
-.modal-inputs:nth-child(4){
-    margin-bottom: 10px;
+.modal-inputs:nth-child(4) {
+  margin-bottom: 10px;
 }
-.paragraph{
-    margin: 10px;
+.paragraph {
+  margin: 10px;
 }
-#modal-btn{
-    background-color: rgb(36, 36, 36);
-    color: white;
-    border: none;
-    width: 120px;
-    height: 30px;
-    border-radius: 3px;
-    cursor: pointer;
+#modal-btn {
+  background-color: rgb(36, 36, 36);
+  color: white;
+  border: none;
+  width: 120px;
+  height: 30px;
+  border-radius: 3px;
+  cursor: pointer;
 }
