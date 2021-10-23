@@ -33,12 +33,14 @@ header {
   text-decoration: none;
   color: rgb(0, 0, 0);
 }
+.page-ref-active{
+  border-bottom: 2px solid black;
+}
 .lil-container {
   display: flex;
 }
 .item-container {
   margin: 0 20px;
-  border-bottom: 2px solid black;
 }
 .login-btn {
   align-self: center;

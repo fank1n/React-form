@@ -17,7 +17,7 @@ const App = () => {
   const [cartInfo, setCartInfo] = useState([]);
   const [inStock, setInStock] = useState([]);
   const [isAddedProduct, setIsAddedProduct] = useState(true)
-
+  const [isLogged, setIsLogged] = useState(false)
   useEffect(() => {
     fetch("http://localhost:8000/products")
       .then((res) => {
@@ -102,12 +102,29 @@ const App = () => {
           <div className="container">
             <header>
               <div className="inner-cont">
+              {/* {isLogged 
+              ? 
                 <button
                   className="login-btn"
-                  onClick={() => setModalActive(true)}
+                  onClick={() => {
+                    setModalActive(true)
+                    setIsLogged(true)
+                    }}
                 >
-                  login
+                  logout
                 </button>
+              : */}
+                <button
+                    className="login-btn"
+                    onClick={() => {
+                      setModalActive(true)
+                      setIsLogged(true)
+                    }}
+                  >
+                    login
+                  </button>
+              {/* } */}
+
                 <div className="outer-cart-info-container">
                   <div className="cart-container">
                     <p className="cart-count">
@@ -121,18 +138,18 @@ const App = () => {
               </div>
               <div className="lil-container">
                 <div className="item-container">
-                  <NavLink to="/" className="page-ref">
+                  <NavLink exact to="/" className="page-ref" activeClassName = "page-ref-active">
                     Home
                   </NavLink>
                 </div>
                 <div className="item-container">
-                  <NavLink to="/about" className="page-ref">
+                  <NavLink exact to="/about" className="page-ref" activeClassName = "page-ref-active">
                     About
                   </NavLink>
                 </div>
               </div>
             </header>
-            <Modal active={modalActive} setActive={setModalActive}></Modal>
+            {isLogged ? <Modal active={modalActive} setActive={setModalActive}></Modal> : null}
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/about" component={About} />

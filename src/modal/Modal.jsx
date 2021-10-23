@@ -8,9 +8,23 @@ const Modal = ({ active, setActive }) => {
     >
       <div
         className={active ? "modal-content active " : "modal-content"}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+        }}
       >
-        <p className="modal-name">Авторизация</p>
+        <div>
+          <img
+            className="modal-cross"
+            src="https://cdn-icons-png.flaticon.com/512/659/659891.png"
+            height="20px"
+            width="20px"
+            onClick={() => {
+              setActive(false);
+            }}
+          ></img>
+          <p className="modal-name">Авторизация</p>
+        </div>
         <form className="modal-inputs-container">
           <p className="paragraph">Login</p>
           <input className="modal-inputs" type="text"></input>

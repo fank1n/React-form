@@ -19,6 +19,7 @@
   border: 2px solid black;
   width: 136px;
   cursor: pointer;
+  border-radius: 3px;
 }
 .add-to-cart-btn:hover {
   color: white;

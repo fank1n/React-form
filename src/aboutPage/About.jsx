@@ -3,7 +3,7 @@ import "./About.css";
 const About = () => {
   return (
     <>
-      <h1 className="title">Notebook shop</h1>
+      <h1 className="title">BEST NOTEBOOK SHOP!</h1>
       <p className="lil-title">
         Here you can find an extremely small range of laptops
       </p>
