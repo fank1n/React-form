@@ -1,49 +1,44 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import Blank from "./Blank";
 import Summary from "./Summary";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
+const App = () => {
+  const [state, setState] = useState({
+    formData: {
+      firstName: "",
+      secondName: "",
+      date: "",
+      phoneNumber: "",
+      site: "",
+      about: "",
+      stack: "",
+      lastProj: "",
+    },
+    isSubmitted: false,
+    isValid: false,
 
-    this.state = {
-      formData: {
-        firstName: "",
-        secondName: "",
-        date: "",
-        phoneNumber: "",
-        site: "",
-        about: "",
-        stack: "",
-        lastProj: "",
-      },
-      isSubmitted: false,
-      isValid: false,
-
-      errorStatus: {
-        firstName: "",
-        secondName: "",
-        date: "",
-        phoneNumber: "",
-        site: "",
-        about: "",
-        stack: "",
-        lastProj: "",
-      },
-    };
-  }
-
-  validateForm = () => {
+    errorStatus: {
+      firstName: "",
+      secondName: "",
+      date: "",
+      phoneNumber: "",
+      site: "",
+      about: "",
+      stack: "",
+      lastProj: "",
+    },
+  });
+  const validateForm = () => {
     const nameRegExp = /^[А-Яа-яЁё]+$/;
-    const phoneNumberRegExp =
-      /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
+    const phoneNumberRegExp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/
     const urlRegExp =
       /\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i;
-    for (let [name, value] of Object.entries(this.state.formData)) {
+    for (let [name, value] of Object.entries(state.formData)) {
       if (value === "") {
-        this.setState((previous) => {
+        setState((previous) => {
           return {
+            ...previous,
             errorStatus: {
               ...previous.errorStatus,
               [name]: "Поле пустое, пожалуйста заполните",
@@ -57,8 +52,9 @@ class App extends React.Component {
         (name === "firstName" || name === "secondName") &&
         !nameRegExp.test(value)
       ) {
-        this.setState((previous) => {
+        setState((previous) => {
           return {
+            ...previous,
             formData: {
               ...previous.formData,
               [name]: value,
@@ -76,8 +72,9 @@ class App extends React.Component {
         (name === "firstName" || name === "secondName") &&
         value[0] !== value[0].toUpperCase()
       ) {
-        this.setState((previous) => {
+        setState((previous) => {
           return {
+            ...previous,
             errorStatus: {
               ...previous.errorStatus,
               [name]: `${name === "firstName" ? "Имя" : "Фамилия"} должн${
@@ -90,8 +87,9 @@ class App extends React.Component {
         return;
       }
       if (name === "phoneNumber" && !phoneNumberRegExp.test(value)) {
-        this.setState((previous) => {
+        setState((previous) => {
           return {
+            ...previous,
             formData: {
               ...previous.formData,
               [name]: value,
@@ -107,8 +105,9 @@ class App extends React.Component {
         return;
       }
       if (name === "site" && !urlRegExp.test(value)) {
-        this.setState((previous) => {
+        setState((previous) => {
           return {
+            ...previous,
             formData: {
               ...previous.formData,
               [name]: value,
@@ -123,36 +122,38 @@ class App extends React.Component {
         });
         return;
       }
-      this.setState((previous) => {
+      setState((previous) => {
         return {
+          ...previous,
           isValid: true,
         };
       });
     }
   };
-
-  submitForm = (e) => {
+  const submitForm = (e) => {
     e.preventDefault();
-    this.validateForm();
-    this.setState(() => {
+    validateForm();
+    setState((previous) => {
       return {
+        ...previous,
         isSubmitted: true,
       };
     });
   };
 
-  changeForm = ({ target: { name, value } }) => {
+  const changeForm = ({ target: { name, value } }) => {
     const nameRegExp = /^[А-Яа-яЁё]+$/;
     const phoneNumberRegExp =
       /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/;
     const urlRegExp =
       /\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i;
-    this.setState((previous) => {
+    setState((previous) => {
       if (
         (name === "firstName" || name === "secondName") &&
         !nameRegExp.test(value)
       ) {
         return {
+          ...previous,
           formData: {
             ...previous.formData,
             [name]: value,
@@ -162,6 +163,7 @@ class App extends React.Component {
             ...previous.errorStatus,
             [name]: "Имя должно быть на кириллице",
           },
+          isSubmitted: false,
         };
       }
 
@@ -174,6 +176,7 @@ class App extends React.Component {
         value.length > 600
       ) {
         return {
+          ...previous,
           formData: {
             ...previous.formData,
             [name]: value.slice(0, 600),
@@ -183,6 +186,7 @@ class App extends React.Component {
             ...previous.errorStatus,
             [name]: "Превышен лимит знаков",
           },
+          isSubmitted: false,
         };
       }
 
@@ -191,6 +195,7 @@ class App extends React.Component {
         value.length < 600
       ) {
         return {
+          ...previous,
           formData: {
             ...previous.formData,
             [name]: value,
@@ -200,10 +205,12 @@ class App extends React.Component {
             ...previous.errorStatus,
             [name]: "",
           },
+          isSubmitted: false,
         };
       }
       if (name === "phoneNumber" && !phoneNumberRegExp.test(value)) {
         return {
+          ...previous,
           formData: {
             ...previous.formData,
             [name]: value,
@@ -213,10 +220,12 @@ class App extends React.Component {
             ...previous.errorStatus,
             [name]: "Не соответствие формату. Формат: +X XXX XX XX",
           },
+          isSubmitted: false,
         };
       }
       if (name === "site" && !urlRegExp.test(value)) {
         return {
+          ...previous,
           formData: {
             ...previous.formData,
             [name]: value,
@@ -226,9 +235,11 @@ class App extends React.Component {
             ...previous.errorStatus,
             [name]: "Не соответствие на формат. Формат: https://...",
           },
+          isSubmitted: false,
         };
       }
       return {
+        ...previous,
         formData: {
           ...previous.formData,
           [name]: value,
@@ -238,18 +249,21 @@ class App extends React.Component {
           ...previous.errorStatus,
           [name]: "",
         },
+        isSubmitted: false,
       };
     });
   };
 
-  handlerBlur = ({ target: { name, value } }) => {
-    this.setState((previous) => {
+  const handlerBlur = ({ target: { name, value } }) => {
+    setState((previous) => {
       if (value === "") {
         return {
+          ...previous,
           errorStatus: {
             ...previous.errorStatus,
             [name]: "Поле пустое, пожалуйста заполните",
           },
+          isSubmitted: false,
         };
       }
       if (
@@ -257,19 +271,25 @@ class App extends React.Component {
         value[0] !== value[0].toUpperCase()
       ) {
         return {
+          ...previous,
           errorStatus: {
             ...previous.errorStatus,
             [name]: `${name === "firstName" ? "Имя" : "Фамилия"} должн${
               name === "firstName" ? "о" : "а"
             } начинаться с заглавной буквы`,
           },
+          isSubmitted: false,
         };
       }
+      return {
+        ...previous,
+        isValid: true,
+      };
     });
   };
 
-  resetForm = (e) => {
-    this.setState({
+  const resetForm = (e) => {
+    setState({
       firstName: "",
       secondName: "",
       date: "",
@@ -294,61 +314,21 @@ class App extends React.Component {
     });
   };
 
-  render() {
-    const {
-      firstName,
-      secondName,
-      date,
-      phoneNumber,
-      site,
-      about,
-      stack,
-      lastProj,
-    } = this.state.formData;
-
-    if (this.state.isSubmitted && this.state.isValid) {
-      return (
-        <Summary
-          firstName={firstName}
-          secondName={secondName}
-          date={date}
-          phoneNumber={phoneNumber}
-          site={site}
-          date={date}
-          phoneNumber={phoneNumber}
-          site={site}
-          about={about}
-          stack={stack}
-          lastProj={lastProj}
-          changeForm={this.changeForm}
-          resetForm={this.resetForm}
-          submitForm={this.submitForm}
-        />
-      );
-    }
-    return (
-      <div>
-        <Blank
-          firstName={firstName}
-          secondName={secondName}
-          date={date}
-          phoneNumber={phoneNumber}
-          site={site}
-          date={date}
-          phoneNumber={phoneNumber}
-          site={site}
-          about={about}
-          stack={stack}
-          lastProj={lastProj}
-          changeForm={this.changeForm}
-          resetForm={this.resetForm}
-          submitForm={this.submitForm}
-          errorStatus={this.state.errorStatus}
-          handlerBlur={this.handlerBlur}
-        />
-      </div>
-    );
+  if (state.isSubmitted && state.isValid) {
+    return <Summary formData={state.formData} />;
   }
-}
+  return (
+    <div>
+      <Blank
+        formData={state.formData}
+        changeForm={changeForm}
+        resetForm={resetForm}
+        submitForm={submitForm}
+        errorStatus={state.errorStatus}
+        handlerBlur={handlerBlur}
+      />
+    </div>
+  );
+};
 
 export default App;
