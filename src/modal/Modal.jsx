@@ -1,6 +1,77 @@
 import "./Modal.css";
+import { useState, useContext, useEffect } from "react";
+import Context from "../context";
+
 
 const Modal = ({ active, setActive }) => {
+  const {loggedInfo, setLoggedInfo, succesLogin, setSuccesLogin, formValid, setFormValid} = useContext(Context);
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoginClicked, setIsLoginClicked] = useState(false)
+  const [isPasswordClicked, setIsPasswordClicked] = useState(false)
+  const [loginError, setLoginError] = useState('Некорректный логин')
+  const [passwordError, setPasswordError] = useState('Некорректный пароль')
+  const [isAdmin, setIsAdmin] = useState(false);
+  // console.log(loggedInfo.userData[0].login)
+
+  useEffect(() => {
+    if(loginError || passwordError){
+      setFormValid(false)
+    }
+    else{
+      setActive(false)
+      setFormValid(true);
+    }
+  }, [loginError, passwordError])
+
+  const blurHandler = (e) => {
+    switch (e.target.name) {
+      case 'login':
+          setIsLoginClicked(true)
+        break
+    
+      case 'password':
+        setIsPasswordClicked(true)
+        break
+    }
+  }
+  const loginHandler = (e) => {
+    setLogin(e.target.value)
+    const trueAdminLogin = loggedInfo.userData[0].login;
+    const trueCustomerLogin = loggedInfo.userData[1].login;
+
+    if(e.target.value === trueAdminLogin){
+      setLoginError('');
+      setIsAdmin(true);
+    }
+    else if (e.target.value === trueCustomerLogin){
+      setLoginError('');
+      setIsAdmin(false);
+    }
+    else{
+      setLoginError('Некорректно введенный логин')
+      setIsAdmin(false);
+    }
+  }
+  const passwordHandler = (e) => {
+    setPassword(e.target.value)
+    const trueAdminPassword = loggedInfo.userData[0].password;
+    const trueCustomerPassword = loggedInfo.userData[1].password;
+    
+    if(e.target.value === trueAdminPassword){
+      setPasswordError('');
+      setIsAdmin(true);
+    }
+    else if(e.target.value === trueCustomerPassword){
+      setPasswordError('');
+      setIsAdmin(false);
+    }
+    else{
+      setPasswordError('Некорректно введенный пароль');
+      setIsAdmin(false);
+    }
+    // (e.target.value !== truePassword) ? setPasswordError('Некорректно введенный пароль') : setPasswordError('');
+  }
   return (
     <div
       className={active ? "modal active " : "modal"}
@@ -26,12 +97,30 @@ const Modal = ({ active, setActive }) => {
           <p className="modal-name">Авторизация</p>
         </div>
         <form className="modal-inputs-container">
-          <p className="paragraph">Login</p>
-          <input className="modal-inputs" type="text"></input>
-          <p className="paragraph">Password</p>
-          <input className="modal-inputs" type="password"></input>
-          <br />
-          <button id="modal-btn">Login</button>
+          <p className="paragraph">Логин</p>
+          <input 
+          className="modal-inputs" 
+          value = {login} 
+          name = "login" 
+          type="text"
+          onBlur = {e => blurHandler(e)}
+          onChange = {e => loginHandler(e)}
+          >
+          </input>
+          {(isLoginClicked && loginError) && <p className = "modal-errors">{loginError}</p>}
+          <p className="paragraph">Пароль</p>
+          <input 
+          className="modal-inputs"
+           value = {password} 
+           name = "password" 
+           type="password"
+           onBlur = {e => blurHandler(e)}
+           onChange = {e => passwordHandler(e)}
+           >
+           </input>
+           {(isPasswordClicked && passwordError) && <p className = "modal-errors">{passwordError}</p>}
+          <br/>
+          {/* <button disabled={!formValid} onClick = {() => setActive(false)} type='submit' id="modal-btn" >Login</button> */}
         </form>
       </div>
     </div>

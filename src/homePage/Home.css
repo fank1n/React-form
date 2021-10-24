@@ -4,7 +4,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 85px;
+  gap: 70px;
 }
 .prod {
   align-self: center;
@@ -16,7 +16,7 @@
 .add-to-cart-btn {
   color: rgb(36, 36, 36);
   background-color: rgb(255, 255, 255);
-  border: 2px solid black;
+  border: 2px solid rgb(36, 36, 36);
   width: 136px;
   cursor: pointer;
   border-radius: 3px;
@@ -27,8 +27,8 @@
 }
 .prod-title {
   text-decoration: none;
-  color: black;
+  color: rgb(36, 36, 36);
 }
 .prod-title:hover {
-  color: rgb(112, 173, 201);
+  color: #654ea3;
 }

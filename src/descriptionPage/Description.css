@@ -28,7 +28,7 @@
   font-size: 20px;
   color: rgb(36, 36, 36);
   background-color: rgb(255, 255, 255);
-  border: 2px solid black;
+  border: 2px solid rgb(36, 36, 36);
   width: 250px;
   height: 60px;
   cursor: pointer;
@@ -40,12 +40,12 @@
 .desc-selector {
   width: 40px;
   height: 60px;
-  border: 2px solid black;
+  border: 2px solid rgb(36, 36, 36);
   border-left: none;
   outline: none;
   font-size: 18px;
 }
 .desc-selector:hover {
-  background-color: black;
+  background-color: rgb(36, 36, 36);
   color: white;
 }

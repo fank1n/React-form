@@ -16,9 +16,10 @@
 .modal.active {
   opacity: 1;
   pointer-events: all;
+  /* word-break: inherit; */
 }
 .modal-content {
-  padding: 20px 20px 60px;
+  padding: 20px 20px 80px;
   border-radius: 5px;
   background-color: #fff;
   height: 200px;
@@ -52,11 +53,22 @@
   background-color: white ;
   color: rgb(36, 36, 36);
   border: 2px solid rgb(36, 36, 36);
-  width: 90px;
-  height: 30px;
+  width: 120px;
+  height: 40px;
   border-radius: 3px;
   cursor: pointer;
   font-size: 14px;
+  margin-top: 20px;
+}
+#modal-btn:disabled{
+  background-color: #ccc;
+  color: rgb(134, 134, 134);
+  border: none;
+}
+#modal-btn:disabled:hover{
+  background-color: #ccc;
+  color: rgb(134, 134, 134);
+  cursor: auto;
 }
 #modal-btn:hover{
   color: white;
@@ -65,4 +77,9 @@
 .modal-cross{
   margin-left: 380px;
   cursor: pointer;
+}
+.modal-errors{
+  color: red;
+  margin: 0;
+  font-size: 13px;
 }

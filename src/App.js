@@ -17,20 +17,38 @@ const App = () => {
   const [cartInfo, setCartInfo] = useState([]);
   const [inStock, setInStock] = useState([]);
   const [isAddedProduct, setIsAddedProduct] = useState(true)
-  const [isLogged, setIsLogged] = useState(false)
+  const [succesLogin, setSuccesLogin] = useState(false);
+  const [formValid, setFormValid] = useState(false);
+  const [loggedInfo, setLoggedInfo] = useState({
+    userData: [
+      {
+        login: "admin",
+        password: "admin",
+      },
+      {
+        login: "customer",
+        password: "customer",
+      }
+    ]
+  }
+  )
+  // console.log(loggedInfo.userData)
+
+  // useEffect(() => {
+  //   fetch("http://localhost:8000/userData")
+  //     .then((res) => res.json())
+  //     .then((data) => setLoggedInfo(data));
+  // }, []);
+
   useEffect(() => {
     fetch("http://localhost:8000/products")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setInStock(data);
-      });
+      .then((res) => res.json())
+      .then((data) => setInStock(data));
   }, []);
 
   useEffect(() => {
     fetch("http://localhost:8000/cart")
-      .then((response) => response.json())
+      .then((res) => res.json())
       .then((data) => setCartInfo(...data));
   }, []);
 
@@ -47,7 +65,7 @@ const App = () => {
     setCartInfo((previous) => {
       return {
         ...previous,
-        count: Number(previous.count) + 1,
+        count: Number(previous.count) + Number(prodCount),
         amount: Number(previous.amount) + Number(product.price),
       };
     });
@@ -95,6 +113,12 @@ const App = () => {
         handlerPutCart,
         inStock,
         isAddedProduct,
+        loggedInfo,
+        setLoggedInfo,
+        succesLogin,
+        setSuccesLogin,
+        formValid,
+        setFormValid
       }}
     >
       <Router>
@@ -102,31 +126,31 @@ const App = () => {
           <div className="container">
             <header>
               <div className="inner-cont">
-              {/* {isLogged 
-              ? 
-                <button
-                  className="login-btn"
-                  onClick={() => {
-                    setModalActive(true)
-                    setIsLogged(true)
-                    }}
-                >
-                  logout
-                </button>
-              : */}
+                {!formValid 
+              ?
                 <button
                     className="login-btn"
                     onClick={() => {
                       setModalActive(true)
-                      setIsLogged(true)
                     }}
                   >
                     login
                   </button>
-              {/* } */}
-
-                <div className="outer-cart-info-container">
-                  <div className="cart-container">
+              :
+                  <button
+                    className="login-btn"
+                    onClick={() => {
+                      setModalActive(true);
+                      setFormValid(false);
+                    }}
+                  >
+                    logout
+                  </button>
+                }
+                { formValid 
+              ?    
+              <div className="outer-cart-info-container">
+                    <div className="cart-container">
                     <p className="cart-count">
                       Товаров в корзине: {cartInfo.count} шт.
                     </p>
@@ -135,6 +159,10 @@ const App = () => {
                     </p>
                   </div>
                 </div>
+              :
+              <div className="outer-cart-info-container">
+
+                </div>}
               </div>
               <div className="lil-container">
                 <div className="item-container">
@@ -149,7 +177,7 @@ const App = () => {
                 </div>
               </div>
             </header>
-            {isLogged ? <Modal active={modalActive} setActive={setModalActive}></Modal> : null}
+            <Modal active={modalActive} setActive={setModalActive}></Modal>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/about" component={About} />
