@@ -50,7 +50,7 @@
   margin-top: 20px;
 }
 #modal-btn {
-  background-color: white ;
+  background-color: white;
   color: rgb(36, 36, 36);
   border: 2px solid rgb(36, 36, 36);
   width: 120px;
@@ -60,25 +60,25 @@
   font-size: 14px;
   margin-top: 20px;
 }
-#modal-btn:disabled{
+#modal-btn:disabled {
   background-color: #ccc;
   color: rgb(134, 134, 134);
   border: none;
 }
-#modal-btn:disabled:hover{
+#modal-btn:disabled:hover {
   background-color: #ccc;
   color: rgb(134, 134, 134);
   cursor: auto;
 }
-#modal-btn:hover{
+#modal-btn:hover {
   color: white;
   background-color: rgb(36, 36, 36);
 }
-.modal-cross{
+.modal-cross {
   margin-left: 380px;
   cursor: pointer;
 }
-.modal-errors{
+.modal-errors {
   color: red;
   margin: 0;
   font-size: 13px;

@@ -5,9 +5,9 @@ import Context from "../context";
 
 const Description = () => {
   const { productID } = useParams();
-  const { handlerPutCart, isAddedProduct} = useContext(Context);
-  const [product, setProduct] = useState([])
-  const [option, setOption] = useState(1)
+  const { handlerPutCart, isAddedProduct, formValid } = useContext(Context);
+  const [product, setProduct] = useState([]);
+  const [option, setOption] = useState(1);
 
   useEffect(() => {
     fetch(`http://localhost:8000/products/${productID}`)
@@ -35,24 +35,25 @@ const Description = () => {
             Товара в наличии: {product.inStock} шт.
           </p>
           <div className="desc-btn-selector">
-            {(product.inStock > 0) 
-            ? <button
-              className="desc-add-to-cart-btn"
-              onClick={() => handlerPutCart(product, option)}
+            {product.inStock > 0 && formValid ? (
+              <button
+                className="desc-add-to-cart-btn"
+                onClick={() => handlerPutCart(product, option)}
               >
                 Добавить в корзину
               </button>
-            : <button
-              className="desc-add-to-cart-btn"
-              disabled
-              >
-                Not available  
+            ) : (
+              <button className="desc-add-to-cart-btn" disabled>
+                Not available
               </button>
-            }
-            <select onChange = {(e) => setOption(e.target.value)} className="desc-selector">
-              <option  disabled = {product.inStock - 1 < 0}>1</option>
-              <option  disabled = {product.inStock - 2 < 0}>2</option>
-              <option  disabled = {product.inStock - 4 < 0}>4</option>
+            )}
+            <select
+              onChange={(e) => setOption(e.target.value)}
+              className="desc-selector"
+            >
+              <option disabled={product.inStock - 1 < 0}>1</option>
+              <option disabled={product.inStock - 2 < 0}>2</option>
+              <option disabled={product.inStock - 4 < 0}>4</option>
             </select>
           </div>
         </div>

@@ -16,7 +16,7 @@ const App = () => {
   const [modalActive, setModalActive] = useState(false);
   const [cartInfo, setCartInfo] = useState([]);
   const [inStock, setInStock] = useState([]);
-  const [isAddedProduct, setIsAddedProduct] = useState(true)
+  const [isAddedProduct, setIsAddedProduct] = useState(true);
   const [succesLogin, setSuccesLogin] = useState(false);
   const [formValid, setFormValid] = useState(false);
   const [loggedInfo, setLoggedInfo] = useState({
@@ -28,17 +28,9 @@ const App = () => {
       {
         login: "customer",
         password: "customer",
-      }
-    ]
-  }
-  )
-  // console.log(loggedInfo.userData)
-
-  // useEffect(() => {
-  //   fetch("http://localhost:8000/userData")
-  //     .then((res) => res.json())
-  //     .then((data) => setLoggedInfo(data));
-  // }, []);
+      },
+    ],
+  });
 
   useEffect(() => {
     fetch("http://localhost:8000/products")
@@ -53,15 +45,15 @@ const App = () => {
   }, []);
 
   const handlerPutCart = async (product, prodCount = 1) => {
-    setIsAddedProduct(() => !isAddedProduct)
-    let [inStockItem] = [inStock.find(item => item.id === product.id)]
-    inStockItem.inStock -= prodCount
+    setIsAddedProduct(() => !isAddedProduct);
+    let [inStockItem] = [inStock.find((item) => item.id === product.id)];
+    inStockItem.inStock -= prodCount;
     setInStock((previous) => {
       return [
-        ...previous.filter(item => item.id !== product.id),
-        inStockItem
-      ]
-    })
+        ...previous.filter((item) => item.id !== product.id),
+        inStockItem,
+      ];
+    });
     setCartInfo((previous) => {
       return {
         ...previous,
@@ -69,7 +61,7 @@ const App = () => {
         amount: Number(previous.amount) + Number(product.price),
       };
     });
-    
+
     fetch(`http://localhost:8000/products/${product.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -79,7 +71,7 @@ const App = () => {
         title: product.title,
         price: product.price,
         inStock: inStockItem.inStock,
-        fullDescription: product.fullDescription
+        fullDescription: product.fullDescription,
       }),
     })
       .then((res) => {
@@ -90,20 +82,20 @@ const App = () => {
       });
   };
 
-    fetch(`http://localhost:8000/cart/1`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        count: 0,
-        amount: 0,
-      }),
+  fetch(`http://localhost:8000/cart/1`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      count: 0,
+      amount: 0,
+    }),
+  })
+    .then((res) => {
+      return res.json();
     })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .catch((error) => {
+      console.log(error);
+    });
 
   return (
     <Context.Provider
@@ -118,7 +110,7 @@ const App = () => {
         succesLogin,
         setSuccesLogin,
         formValid,
-        setFormValid
+        setFormValid,
       }}
     >
       <Router>
@@ -126,17 +118,16 @@ const App = () => {
           <div className="container">
             <header>
               <div className="inner-cont">
-                {!formValid 
-              ?
-                <button
+                {!formValid ? (
+                  <button
                     className="login-btn"
                     onClick={() => {
-                      setModalActive(true)
+                      setModalActive(true);
                     }}
                   >
                     login
                   </button>
-              :
+                ) : (
                   <button
                     className="login-btn"
                     onClick={() => {
@@ -146,32 +137,40 @@ const App = () => {
                   >
                     logout
                   </button>
-                }
-                { formValid 
-              ?    
-              <div className="outer-cart-info-container">
+                )}
+                {formValid ? (
+                  <div className="outer-cart-info-container">
                     <div className="cart-container">
-                    <p className="cart-count">
-                      Товаров в корзине: {cartInfo.count} шт.
-                    </p>
-                    <p className="cart-amount">
-                      На сумму: {cartInfo.amount} руб.
-                    </p>
+                      <p className="cart-count">
+                        Товаров в корзине: {cartInfo.count} шт.
+                      </p>
+                      <p className="cart-amount">
+                        На сумму: {cartInfo.amount} руб.
+                      </p>
+                    </div>
                   </div>
-                </div>
-              :
-              <div className="outer-cart-info-container">
-
-                </div>}
+                ) : (
+                  <div className="outer-cart-info-container"></div>
+                )}
               </div>
               <div className="lil-container">
                 <div className="item-container">
-                  <NavLink exact to="/" className="page-ref" activeClassName = "page-ref-active">
+                  <NavLink
+                    exact
+                    to="/"
+                    className="page-ref"
+                    activeClassName="page-ref-active"
+                  >
                     Home
                   </NavLink>
                 </div>
                 <div className="item-container">
-                  <NavLink exact to="/about" className="page-ref" activeClassName = "page-ref-active">
+                  <NavLink
+                    exact
+                    to="/about"
+                    className="page-ref"
+                    activeClassName="page-ref-active"
+                  >
                     About
                   </NavLink>
                 </div>

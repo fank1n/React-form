@@ -2,7 +2,6 @@ import "./Modal.css";
 import { useState, useContext, useEffect } from "react";
 import Context from "../context";
 
-
 const Modal = ({ active, setActive }) => {
   const {loggedInfo, setLoggedInfo, succesLogin, setSuccesLogin, formValid, setFormValid} = useContext(Context);
   const [login, setLogin] = useState('');
@@ -12,7 +11,6 @@ const Modal = ({ active, setActive }) => {
   const [loginError, setLoginError] = useState('Некорректный логин')
   const [passwordError, setPasswordError] = useState('Некорректный пароль')
   const [isAdmin, setIsAdmin] = useState(false);
-  // console.log(loggedInfo.userData[0].login)
 
   useEffect(() => {
     if(loginError || passwordError){
@@ -70,8 +68,8 @@ const Modal = ({ active, setActive }) => {
       setPasswordError('Некорректно введенный пароль');
       setIsAdmin(false);
     }
-    // (e.target.value !== truePassword) ? setPasswordError('Некорректно введенный пароль') : setPasswordError('');
   }
+
   return (
     <div
       className={active ? "modal active " : "modal"}
@@ -119,8 +117,6 @@ const Modal = ({ active, setActive }) => {
            >
            </input>
            {(isPasswordClicked && passwordError) && <p className = "modal-errors">{passwordError}</p>}
-          <br/>
-          {/* <button disabled={!formValid} onClick = {() => setActive(false)} type='submit' id="modal-btn" >Login</button> */}
         </form>
       </div>
     </div>
