@@ -3,14 +3,14 @@ import { useState, useContext, useEffect } from "react";
 import Context from "../context";
 
 const Modal = ({ active, setActive }) => {
-  const {loggedInfo, setLoggedInfo, succesLogin, setSuccesLogin, formValid, setFormValid} = useContext(Context);
+  const {loggedInfo, setFormValid, setIsAdmin} = useContext(Context);
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [isLoginClicked, setIsLoginClicked] = useState(false)
   const [isPasswordClicked, setIsPasswordClicked] = useState(false)
   const [loginError, setLoginError] = useState('Некорректный логин')
   const [passwordError, setPasswordError] = useState('Некорректный пароль')
-  const [isAdmin, setIsAdmin] = useState(false);
+  
 
   useEffect(() => {
     if(loginError || passwordError){

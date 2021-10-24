@@ -19,6 +19,7 @@ const App = () => {
   const [isAddedProduct, setIsAddedProduct] = useState(true);
   const [succesLogin, setSuccesLogin] = useState(false);
   const [formValid, setFormValid] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loggedInfo, setLoggedInfo] = useState({
     userData: [
       {
@@ -111,6 +112,8 @@ const App = () => {
         setSuccesLogin,
         formValid,
         setFormValid,
+        isAdmin,
+        setIsAdmin
       }}
     >
       <Router>
@@ -181,6 +184,7 @@ const App = () => {
               <Route exact path="/" component={Home} />
               <Route exact path="/about" component={About} />
               <Route exact path="/product/:productID" component={Description} />
+              <Route render = {() => <h1 className = "not-found"> Упс, страница не найдена</h1>}/>
             </Switch>
           </div>
         </div>

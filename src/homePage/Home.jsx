@@ -1,18 +1,13 @@
 import "./Home.css";
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import Context from "../context";
 
 const Home = () => {
   const {
     inStock,
-    cartInfo,
-    setCartInfo,
     handlerPutCart,
-    succesLogin,
-    setSuccesLogin,
     formValid,
-    setFormValid,
   } = useContext(Context);
 
   return (

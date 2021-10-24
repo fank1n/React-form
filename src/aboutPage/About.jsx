@@ -12,7 +12,7 @@ const About = () => {
         из-под деда или дотера.
       </p>
       <div className="about-pic-container">
-        <img src="https://pressa40.ru/wp-content/uploads/2019/05/pens_schast.jpg"></img>
+        <img src="https://pressa40.ru/wp-content/uploads/2019/05/pens_schast.jpg" alt=''></img>
       </div>
     </>
   );

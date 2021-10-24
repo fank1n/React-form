@@ -2,7 +2,7 @@ html {
   margin: 0;
 }
 body {
-  background-color: rgb(255, 255, 255);
+  background: linear-gradient(to right, #ffafbd, #ffc3a0);
 }
 .container {
   margin: 0 auto;
@@ -17,7 +17,8 @@ header {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: linear-gradient(to right, #654ea3, #eaafc8);
+  background-color: #2c2c2c;
+  /* background: linear-gradient(to right, #654ea3, #eaafc8); */
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
@@ -30,13 +31,15 @@ header {
   margin: 0;
 }
 .page-ref {
+  position: relative;
   margin: 30px;
   text-decoration: none;
-  color: rgb(36, 36, 36);
+  color: #eaafc8;
   font-weight: bold;
+  bottom: 3px;
 }
 .page-ref-active {
-  border-bottom: 2px solid rgb(36, 36, 36);
+  border-bottom: 3px solid #ffffff;
 }
 .lil-container {
   display: flex;
@@ -48,7 +51,7 @@ header {
   align-self: center;
   width: 100px;
   height: 40px;
-  background-color: rgb(36, 36, 36);
+  background-color: #eaafc8;
   color: #fff;
   border: none;
   cursor: pointer;
@@ -87,4 +90,8 @@ header {
 }
 .cart-amount {
   margin: 0;
+}
+.not-found{
+  margin: 100px auto;
+  text-align: center;
 }

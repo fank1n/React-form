@@ -33,6 +33,11 @@
   height: 60px;
   cursor: pointer;
 }
+.desc-add-to-cart-btn:hover:disabled{
+  background-color: #fff;
+  color: rgb(36, 36, 36);
+  cursor: auto;
+}
 .desc-add-to-cart-btn:hover {
   color: white;
   background-color: rgb(36, 36, 36);
@@ -48,4 +53,40 @@
 .desc-selector:hover {
   background-color: rgb(36, 36, 36);
   color: white;
+}
+.editor-btn{
+  margin-top: 10px;
+  font-size: 14px;
+  color: #fff;
+  background-color: rgb(36, 36, 36);
+  border: 2px solid rgb(36, 36, 36);
+  width: 120px;
+  height: 30px;
+  cursor: pointer;
+}
+.editor-btn:hover{
+  border: 2px solid rgb(77, 77, 77);
+  color: rgb(216, 216, 216);
+}
+.editor-container{
+  display: grid;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.editor-save-btn{
+  margin: 0 auto;
+  margin-top: 30px;
+  width: 200px;
+  height: 40px;
+  align-self: center;
+  color: rgb(36, 36, 36);
+  background-color: #fff;
+  border: 2px solid rgb(36, 36, 36);
+}
+.editor-save-btn:hover{
+  color: #fff;
+  background-color: rgb(36, 36, 36);
+  cursor: pointer;
 }
