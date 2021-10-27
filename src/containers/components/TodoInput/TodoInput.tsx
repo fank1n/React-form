@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import { FC } from 'react'
 import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
@@ -14,26 +14,28 @@ export const TodoInput: FC = () => {
     const handleChange = (e: any) => {
         setTodo(e.target.value)
     };
-
-    console.log('props from store', todo)
-    return(
+    return (
         <>
-        <h1 className = "todo-name">Todo List</h1>
-        <div className = "todo-input-filed">
-            <input 
-            className = "todo-input"
-            type="text" 
-            name = "todoInput"
-            value = {todo}
-            placeholder = "Write a note" 
-            onChange = {(e) => handleChange(e)}
-            />
-            <button className = "todo-add-btn" onClick={() => {
-            dispatch(addTodo(todo));
-            setTodo("");
- }}
- >Add</button>
-        </div>
+            <h1 className="todo-name">Todo List</h1>
+            <div className="todo-input-filed">
+                <div >
+                    <input
+                        className="todo-input"
+                        type="text"
+                        name="todoInput"
+                        value={todo}
+                        placeholder="Write a note"
+                        onChange={(e) => handleChange(e)}
+                        maxLength = {160}
+                    /><br/>
+                    <span className="input-counter">Доступное количество символов: {160-todo.length}</span>
+                </div>
+                <button className="todo-add-btn" onClick={() => {
+                    dispatch(addTodo(todo));
+                    setTodo("");
+                }}
+                >Add</button>
+            </div>
         </>
     )
 }

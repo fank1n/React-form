@@ -1,0 +1,38 @@
+.menu-pic{
+    width: 1.5em;
+    height: 1.5em;
+}
+.menu-container{
+    height: 100vh;
+    width: 100px;
+    background-color: rgba(0,0,0,0.0);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.menu{
+    position: absolute;
+    bottom: -80px;
+    right: -170px;
+    width: 160px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+}
+.menu button {
+    margin: 0;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+.close-menu{
+    margin: 2px 0 0 140px;
+    cursor: pointer;
+}
+.editMode{
+    resize: none;
+    width: 100em;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    padding: 10px 10px;
+}

@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 30px;
+    margin-bottom: -20px;
 }
 .todo-input{
     outline: none;
@@ -29,6 +30,7 @@
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
     font-size: 20px;
+    align-self: flex-start;
 }
 .todo-add-btn:hover{
     background-color: #2da44e;
