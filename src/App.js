@@ -1,3 +1,4 @@
+import cartIconLogo from "./icons/cart_icon.svg";
 import "./App.css";
 import {
   BrowserRouter as Router,
@@ -5,17 +6,23 @@ import {
   Route,
   NavLink,
 } from "react-router-dom";
-import Home from "./homePage/Home";
-import About from "./aboutPage/About";
-import Description from "./descriptionPage/Descriptrion";
-import Modal from "./modal/Modal";
-import { useState, useEffect } from "react";
+import Home from "./containers/homePage/Home";
+import About from "./containers/aboutPage/About";
+import Description from "./containers/descriptionPage/Descriptrion";
+import Modal from "./containers/modal/Modal";
+import {useState, useEffect} from "react";
 import Context from "./context";
+import {useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
+import {fetchProducts} from "./api/products";
+import {Cart} from "./containers/Cart/Cart";
+import {
+  openCart,
+  addProductToCart,
+} from "./redux/actions/cartActions";
 
 const App = () => {
   const [modalActive, setModalActive] = useState(false);
-  const [cartInfo, setCartInfo] = useState([]);
-  const [inStock, setInStock] = useState([]);
   const [isAddedProduct, setIsAddedProduct] = useState(true);
   const [succesLogin, setSuccesLogin] = useState(false);
   const [formValid, setFormValid] = useState(false);
@@ -33,78 +40,26 @@ const App = () => {
     ],
   });
 
-  useEffect(() => {
-    fetch("http://localhost:8000/products")
-      .then((res) => res.json())
-      .then((data) => setInStock(data));
-  }, []);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+  const cartIsOpened = useSelector((state) => state.cartIsOpen);
 
   useEffect(() => {
-    fetch("http://localhost:8000/cart")
-      .then((res) => res.json())
-      .then((data) => setCartInfo(...data));
+    dispatch(fetchProducts());
   }, []);
 
   const handlerPutCart = async (product, prodCount = 1) => {
-    setIsAddedProduct(() => !isAddedProduct);
-    let [inStockItem] = [inStock.find((item) => item.id === product.id)];
-    inStockItem.inStock -= prodCount;
-    setInStock((previous) => {
-      return [
-        ...previous.filter((item) => item.id !== product.id),
-        inStockItem,
-      ];
-    });
-    setCartInfo((previous) => {
-      return {
-        ...previous,
-        count: Number(previous.count) + Number(prodCount),
-        amount: Number(previous.amount) + Number(product.price),
-      };
-    });
-
-    fetch(`http://localhost:8000/products/${product.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: product.id,
-        picture: product.picture,
-        title: product.title,
-        price: product.price,
-        inStock: inStockItem.inStock,
-        fullDescription: product.fullDescription,
-      }),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    dispatch(addProductToCart(product.id, prodCount));
   };
 
-  fetch(`http://localhost:8000/cart/1`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      count: 0,
-      amount: 0,
-    }),
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  const handlerOpenCart = () => {
+    dispatch(openCart());
+  };
 
   return (
     <Context.Provider
       value={{
-        cartInfo,
-        setCartInfo,
         handlerPutCart,
-        inStock,
         isAddedProduct,
         loggedInfo,
         setLoggedInfo,
@@ -113,7 +68,7 @@ const App = () => {
         formValid,
         setFormValid,
         isAdmin,
-        setIsAdmin
+        setIsAdmin,
       }}
     >
       <Router>
@@ -144,12 +99,13 @@ const App = () => {
                 {formValid ? (
                   <div className="outer-cart-info-container">
                     <div className="cart-container">
-                      <p className="cart-count">
-                        Товаров в корзине: {cartInfo.count} шт.
-                      </p>
-                      <p className="cart-amount">
-                        На сумму: {cartInfo.amount} руб.
-                      </p>
+                      <img
+                        className="open-cart-btn"
+                        src={cartIconLogo}
+                        width="35px"
+                        height="35px"
+                        onClick={() => handlerOpenCart()}
+                      />
                     </div>
                   </div>
                 ) : (
@@ -179,12 +135,17 @@ const App = () => {
                 </div>
               </div>
             </header>
+            {cartIsOpened ? <Cart /> : null}
             <Modal active={modalActive} setActive={setModalActive}></Modal>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/about" component={About} />
               <Route exact path="/product/:productID" component={Description} />
-              <Route render = {() => <h1 className = "not-found"> Упс, страница не найдена</h1>}/>
+              <Route
+                render={() => (
+                  <h1 className="not-found"> Упс, страница не найдена</h1>
+                )}
+              />
             </Switch>
           </div>
         </div>

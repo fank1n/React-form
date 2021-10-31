@@ -1,5 +1,6 @@
 .desc-prod {
   padding-top: 80px;
+  height: 500px;
 }
 .desc-img {
   float: left;
@@ -16,7 +17,8 @@
   padding-bottom: 10px;
 }
 .desc-full-description {
-  margin: 100px 50px 85px;
+  margin: -100px 50px 0 50px;
+  padding-bottom: 100px;
 }
 .desc-prod-instock {
   font-size: 18px;
