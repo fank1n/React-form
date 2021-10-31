@@ -13,7 +13,7 @@ const todoSlice = createSlice({
       },
       prepare: (description: string) => ({
         payload: {
-          id: (Math.random() * 1000).toString(),
+          id: (Math.random() *1000).toString(),
           description,
           completed: false,
           favorite: false

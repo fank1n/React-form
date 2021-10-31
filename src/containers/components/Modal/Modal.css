@@ -11,6 +11,7 @@
     opacity: 0;
     transition: 0.5s;
     pointer-events: none;
+    z-index: 3;
   }
   .modal.active {
     opacity: 1;
@@ -18,14 +19,81 @@
     /* word-break: inherit; */
   }
   .modal-content {
-    padding: 20px 20px 80px;
+    padding: 20px 20px 20px;
     border-radius: 5px;
     background-color: #fff;
-    height: 200px;
     width: 400px;
     transform: scale(0.5);
     transition: 0.3s all;
   }
   .modal-content.active{
       transform: scale(1);
+      transition: 0.5s all;
+      position: relative; 
+  }
+  .modal-title{
+    text-align: center;
+    margin-top: 0;
+    color: rgb(44, 44, 44);
+  }
+  .modal-btn-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .modal-confirm-btn{
+    width: 100px;
+    height: 40px;
+    border: none;
+    background-color: #b4cfe6;
+    color: rgb(44, 44, 44);
+    border-radius: 5px;
+    transform: scale(1);
+    transition: 0.5s all;
+  }
+  .modal-confirm-btn:hover{
+    cursor: pointer;
+    transform: scale(1.06);
+    transition: 0.5s all;
+  }
+  .modal-cancel-btn{
+    width: 100px;
+    height: 40px;
+    border: 1px solid #b4cfe6;
+    background-color: white;
+    color: rgb(44, 44, 44);
+    border-radius: 5px;
+    transform: scale(1);
+    transition: 0.5s all;
+  }
+  .modal-cancel-btn:hover{
+    cursor: pointer;
+    transform: scale(1.06);
+    transition: 0.5s all;
+  }
+  .modalText{
+    word-break: break-all;
+    padding: 0px 10px;
+    color: rgb(44, 44, 44);
+  }
+  .modal-text-container{
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  .modal-date{
+    font-size: 14px;
+    margin-top: 0;
+    color: rgb(26, 26, 26);
+  }
+  .modal-close-cross{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+    opacity: 0.4;
+    width: 20px;
+    height: 20px;
+  }
+  .modal-close-cross:hover{
+    opacity: 0.8;
   }

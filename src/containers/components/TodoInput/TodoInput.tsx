@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../redux/store";
 import './TodoInput.css';
 import { addTodo } from "../../../redux/reducers/addTodoReducer";
+import logo_plus from "../../../icons/plus.svg"
 
 export const TodoInput: FC = () => {
     const [todo, setTodo] = useState<string>('');
@@ -16,7 +17,7 @@ export const TodoInput: FC = () => {
     };
     return (
         <>
-            <h1 className="todo-name">Todo List</h1>
+            <h1 className="todo-name">Список задач</h1>
             <div className="todo-input-filed">
                 <div >
                     <input
@@ -24,17 +25,20 @@ export const TodoInput: FC = () => {
                         type="text"
                         name="todoInput"
                         value={todo}
-                        placeholder="Write a note"
+                        placeholder="Запишите что-нибудь"
                         onChange={(e) => handleChange(e)}
                         maxLength = {160}
                     /><br/>
-                    <span className="input-counter">Доступное количество символов: {160-todo.length}</span>
+                    {todo.length === 160
+                     ?(<span className="input-counter-error">Превышен лимит текста!</span>)
+                     :(<span className="input-counter">Доступное количество символов: {160-todo.length}</span>)}
+                    
                 </div>
                 <button className="todo-add-btn" onClick={() => {
                     dispatch(addTodo(todo));
                     setTodo("");
                 }}
-                >Add</button>
+                ><img className = "input-plus-btn" src={logo_plus} alt="add" width = "30px" height = "30px"/></button>
             </div>
         </>
     )
