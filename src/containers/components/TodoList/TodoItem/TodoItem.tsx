@@ -1,8 +1,8 @@
-import { FC, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setTodoStatus, removeTodo, editTodo } from "../../../../redux/reducers/addTodoReducer";
-import { RootState, AppDispatch } from "../../../../redux/store";
-import { Todo } from '../../../../models/Todo'
+import {FC, useState} from "react";
+import {useSelector, useDispatch} from "react-redux";
+import {setTodoStatus, removeTodo, editTodo} from "../../../../redux/reducers/addTodoReducer";
+import {RootState, AppDispatch} from "../../../../redux/store";
+import {Todo} from '../../../../models/Todo'
 import './TodoItem.css';
 import Modal from "../../Modal/Modal";
 import cross from "../../../../icons/cross.svg"

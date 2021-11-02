@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Todo } from "../../models/Todo";
-
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {Todo} from "../../models/Todo";
+import INITIALIZE_TODOS from "../actions/todoActions"
 const initialState = [] as Todo[];
 
 const todoSlice = createSlice({
@@ -39,5 +39,14 @@ const todoSlice = createSlice({
   },
 });
 
-export const { addTodo, removeTodo, setTodoStatus, editTodo } = todoSlice.actions;
+export const toDoReducer = (state = [], action:any ) => {
+  switch(action.type) {
+      case INITIALIZE_TODOS: {
+          const items = action.payload
+          return items
+      }
+  }
+}
+
+export const {addTodo, removeTodo, setTodoStatus, editTodo} = todoSlice.actions;
 export default todoSlice.reducer;
