@@ -27,8 +27,8 @@ const Modal = ({postDate, modalText, active, setActive, id }:any) => {
                 </div>
                 <p className = "modal-date">Дата создания: {postDate}</p>
                 <div className="modal-btn-container">
-                    <button className = "modal-cancel-btn" onClick={() => setActive(false)}>Отмена</button>
-                    <button className = "modal-confirm-btn" onClick = {handleDeleteTodo}>Да, удалить</button>
+                    <button className="modal-cancel-btn" data-test-id="cancel-btn" onClick={() => setActive(false)}>Отмена</button>
+                    <button className="modal-confirm-btn" onClick = {handleDeleteTodo}>Да, удалить</button>
                 </div>
             </div>
         </div>

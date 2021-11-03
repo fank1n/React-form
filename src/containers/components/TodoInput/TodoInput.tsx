@@ -18,6 +18,7 @@ export const TodoInput: FC = () => {
     return (
         <>
             <h1 className="todo-name">Список задач</h1>
+            <p data-test-id = "paragraph-for-input-test">{todo}</p>
             <div className="todo-input-filed">
                 <div >
                     <input
@@ -32,7 +33,6 @@ export const TodoInput: FC = () => {
                     {todo.length === 160
                      ?(<span className="input-counter-error">Превышен лимит текста!</span>)
                      :(<span className="input-counter">Доступное количество символов: {160-todo.length}</span>)}
-                    
                 </div>
                 <button className="todo-add-btn" onClick={() => {
                     dispatch(addTodo(todo));

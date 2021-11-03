@@ -10,7 +10,3 @@ import toJson from "enzyme-to-json"
 
 Enzyme.configure({adapter: new EnzymeAdapter()})
 
-// global.shallow = shallow;
-// global.render = render;
-// global.mount = mount;
-// global.toJson = toJson;

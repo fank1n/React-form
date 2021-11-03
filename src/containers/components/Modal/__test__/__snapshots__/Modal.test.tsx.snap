@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal Modal component should match shapshot 1`] = `ReactWrapper {}`;
+
+exports[`Modal Modal component should render correctly 1`] = `ReactWrapper {}`;
+
+exports[`Modal Modal component should render elements currectly 1`] = `ReactWrapper {}`;
+
+exports[`Modal Modal component snapshot should be correct 1`] = `ReactWrapper {}`;
